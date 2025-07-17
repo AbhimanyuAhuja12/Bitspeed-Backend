@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "../generated/prisma"
 import logger from "../utils/logger"
 
 class Database {
@@ -7,12 +7,7 @@ class Database {
   public static getInstance(): PrismaClient {
     if (!Database.instance) {
       Database.instance = new PrismaClient({
-        log: ["query", "info", "warn", "error"],
-      })
-
-      Database.instance.$on("query", (e) => {
-        logger.debug("Query: " + e.query)
-        logger.debug("Duration: " + e.duration + "ms")
+        log: ["info", "warn", "error"],
       })
     }
 
